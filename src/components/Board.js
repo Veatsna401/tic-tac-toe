@@ -49,11 +49,12 @@ const Board = () => {
 
   const resetGame = () => {
     setSquares(Array(9).fill(null));
+    setXIsNext(!xIsNext);
   }
 
   return (
     <div className="game-board">
-      <div className="status">{status}</div>
+      <div className={winner ? "status-winner" : "status"}>{status}</div>
       <div className="board">
         <div className="board-row">
           <Square value={squares[0]} onClick={() => handleClick(0)} />
@@ -70,8 +71,8 @@ const Board = () => {
           <Square value={squares[7]} onClick={() => handleClick(7)} />
           <Square value={squares[8]} onClick={() => handleClick(8)} />
         </div>
-        <Button label="Reset Game" onClick={() => resetGame()} />
       </div>
+      <Button label="Reset Game" onClick={() => resetGame()} />
     </div>
   );
 }
