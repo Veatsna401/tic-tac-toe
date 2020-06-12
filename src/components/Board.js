@@ -7,6 +7,7 @@ import kaia from '../assets/images/kaia.png';
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [count, setCount] = useState(0);
 
   const calculateWinner = (squares) => {
     const lines = [
@@ -34,6 +35,8 @@ const Board = () => {
     status = 'Maly is the winner!';
   } else if (winner === kaia) {
     status = 'Kaia is the winner!';
+  } else if (count === 9) {
+    status = "It's a draw!";
   } else {
     status = "It's " + (xIsNext ? "Maly's" : "Kaia's")  + " turn";
   }
@@ -45,11 +48,13 @@ const Board = () => {
     squares[i] = xIsNext ? maly : kaia;
     setSquares(squares);
     setXIsNext(!xIsNext);
+    setCount(count + 1);
   }
 
   const resetGame = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(!xIsNext);
+    setCount(0);
   }
 
   return (
